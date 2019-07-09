@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>Попытка сделать панель регистрации</h1>
+            <div class="under_line"></div>
+        </div>
+
+        <div class="main_class" id="ala1">
+           
+            
+
+                    <div class="tab_menu">
+                        <div class="menu_btn">
+                            <button class="btns_in_menu" onclick=authVis()>Вход</button>
+                            <button class="btns_in_menu" onclick=regVis()>Регистрация</button>
+                            <button class="btns_in_menu" onclick=backVis()>Восстановить</button>
+                        </div>
+
+
+                        <div class="input_area all_area">
+                            <p> Поле входа </p>
+                            <p><input type="text" class="log_inp" name="login" placeholder="Login"></p>
+                            <p><input type="text" class="log_inp" name="password" placeholder="Password"></p>
+                            <p><button class="btn_log" onclick=Auth(this.form)>Вход</button></p>
+                        </div>
+
+                        <div class="register_area all_area">
+                            <p> Поле регистрации </p>
+                            <p><input type="text" class="log_inp" name="reg_login" placeholder="Login"></p>
+                            <p><input type="text" class="log_inp" name="reg_password" placeholder="Password"></p>
+                            <p><button class="btn_log">Регистрация</button></p>
+                        </div>
+
+                        <div class="back_area all_area">
+                            <p> Поле восстановления пароля </p>
+                            <p><input type="text" class="log_inp" name="back_login" placeholder="Login"></p>
+                            <p><input type="text" class="log_inp" name="back_password" placeholder="Password"></p>
+                            <p><button class="btn_log">Восстановить</button></p>
+                        </div>
+
+                    </div>
+                
+            
+        </div>
+        <script>
+
+            log_area = document.getElementsByClassName("input_area");
+            reg_area = document.getElementsByClassName("register_area");
+            ba_area = document.getElementsByClassName("back_area");
+            console.log(log_area);
+
+            function authVis() {
+                log_area[0].style.visibility = "visible";
+                reg_area[0].style.visibility = "hidden";
+                ba_area[0].style.visibility = "hidden";
+            }
+
+            function regVis() {
+                log_area[0].style.visibility = "hidden";
+                reg_area[0].style.visibility = "visible";
+                ba_area[0].style.visibility = "hidden";
+
+            }
+
+            function backVis() {
+                log_area[0].style.visibility = "hidden";
+                reg_area[0].style.visibility = "hidden";
+                ba_area[0].style.visibility = "visible";
+
+            }
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,89 @@
+.header {
+    height: 80px;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    
+}
+
+.under_line {
+    height: 3px;
+    background-color: rgba(0,0,0,0.2);
+    margin-top:40px; 
+}
+.log_inp {
+    padding: 5px;
+    font-size: 15px;
+}
+
+.btn_log {
+    border: none;
+    background-color: red;
+    color:white;
+    font-size:15px;
+    padding: 8px 15px;
+    border-radius: 10%;
+
+}
+
+.btn_log:hover {
+    background-color: brown;
+}
+
+.main_class {
+    width: 100%;
+    text-align: center;
+}
+
+
+.tab_menu {
+    position: relative;
+    display: inline-block;
+    height: 500px;
+    width: 500px;
+    background-color: rgb(252,242,242);
+    
+    
+}
+
+.menu_btn {
+    margin-top:5px;
+}
+
+.btns_in_menu {
+    
+    border: none;
+    border-bottom: 1px;
+    padding: 10px 43.3px;
+    background-color: red;
+    color: white;
+    font-size: 16px;
+}
+
+.btns_in_menu:hover {
+    background-color: brown;
+}
+
+.all_area {
+    position: absolute;
+    left:30%;
+    top: 15%;
+}
+
+.input_area {
+    
+    visibility: hidden;
+    
+}
+
+.register_area {
+    visibility: hidden;
+
+}
+
+.back_area{
+    visibility: hidden;
+
+}
+
