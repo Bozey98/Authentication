@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>Панель регистрации</h1>
+            <div class="under_line"></div>
+        </div>
+
+        <div class="main_class" id="ala1">
+           
+            
+            <form id="form1">
+                    <div class="tab_menu">
+                        <div class="menu_btn">
+                            <button type = "button" class="btns_in_menu" onclick=authVis()>Вход</button>
+                            <button type = "button" class="btns_in_menu" onclick=regVis()>Регистрация</button>
+                            <button type = "button" class="btns_in_menu" onclick=backVis()>Сменить пароль</button>
+                        </div>
+
+
+                        <div class="input_area all_area">
+                            <p> Поле входа </p>
+                            <p><input type="text" class="log_inp" name="auth_login" placeholder="Login"></p>
+                            <p><input type="password" class="log_inp" name="auth_password" placeholder="Password"></p>
+                            <p><button type="button" class="btn_log" onclick=Auth()>Вход</button></p>
+                            <br>
+                            <p><label name="info_auth" class="info_auth_style"></label></p>
+                        </div>
+
+                        <div class="register_area all_area">
+                            <p> Поле регистрации </p>
+                            <p><input type="text" class="log_inp" name="reg_login" placeholder="Login"></p>
+                            <p><input type="password" class="log_inp" name="reg_password" placeholder="Password"></p>
+                            <p><input type="text" class="log_inp" name="reg_name" placeholder="Имя"></p>
+                            <p><input type="text" class="log_inp" name="reg_surname" placeholder="Фамилия"></p>
+                            <p><input type="text" class="log_inp" name="reg_email" placeholder="Почта"></p>
+                            <p><input type="text" class="log_inp" name="reg_word" placeholder="Секретное слово"></p>
+                            <p><button type="button" class="btn_log" onclick=Reg()>Регистрация</button></p>
+                        </div>
+
+                        <div class="back_area all_area">
+                            <p> Поле замены пароля </p>
+                            <p><input type="text" class="log_inp" name="back_login" placeholder="Login"></p>
+                            <p><input type="password" class="log_inp" name="back_old_password" placeholder="Password"></p>
+                            <p><input type="password" class="log_inp" name="back_new_password" placeholder="New password"></p>
+                            <p><button type="button" class="btn_log" onclick=Back()>Восстановить</button></p>
+                        </div>
+
+                    </div>
+                
+            </form>
+        </div>
+        <script>
+           
+            var DB = [];
+
+            function addNewUser(log,pass,_name,_surname,_email,_word) {
+                new_user = {
+                    login: log,
+                    password: pass,
+                    name: _name,
+                    surname: _surname,
+                    email: _email,
+                    code_word: _word
+                }
+
+                DB.push(new_user);
+            }
+           
+            form = document.getElementById("form1");
+            log_area = document.getElementsByClassName("input_area");
+            reg_area = document.getElementsByClassName("register_area");
+            ba_area = document.getElementsByClassName("back_area");
+            info_auth_label = document.getElementsByName("info_auth");
+
+            function Reg() {
+                var checkReg = false;
+                for (var user in DB) {
+                    if (DB[user].login == form.reg_login.value ) {
+                        alert("Пользователь с таким именем уже зарегистрирован");
+                        checkReg = true;
+                        break;
+                    }
+                    else 
+                    {
+                        checkReg = false;
+                    }
+                }
+                if (checkReg == false) {
+                    addNewUser(form.reg_login.value , form.reg_password.value , form.reg_name.value , form.reg_surname.value , form.reg_email.value , form.reg_word.value);
+                    alert("Новый пользователь успешно зарегистрирован");
+                }
+                
+                form.reg_login.value = "";
+                form.reg_password.value = "";
+                form.reg_name.value = "";
+                form.reg_surname.value = "";
+                form.reg_email.value = "";
+                form.reg_word.value = "";
+
+            }
+
+            function Auth() {
+
+                var checkAuth = false;
+
+                for (var user in DB) {
+                    if ((DB[user].login == form.auth_login.value) && (DB[user].password == form.auth_password.value)) {
+                        alert("Вы успешно зашли");
+                        checkAuth = false;
+                        info_auth_label[0].innerHTML = "Добро пожаловать " + DB[user].name + " " + DB[user].surname;
+                        break;
+                    }
+                    else {
+                        checkAuth = true;
+                    }
+                }
+                if ((checkAuth == true) || (DB.length == 0)) {
+                    alert("Неверный логин или пароль");
+                }
+                form.auth_login.value = "";
+                form.auth_password.value = "";
+            }
+            
+            function Back() {
+                var checkBack = false;
+
+                for (var user in DB) {
+                    if ((DB[user].login == form.back_login.value) && (DB[user].password == form.back_old_password.value)) {
+                        DB[user].password = form.back_new_password.value;
+                        alert("Пароль успешно изменен");
+                        checkBack = false;
+                        break;
+                    }
+                    else {
+                        checkBack = true;
+                    }
+                }
+                if  (checkBack == true) {
+                    alert ("Неверный логин или старый пароль");
+                }
+                
+
+                form.back_login = "";
+                form.back_new_password = "";
+                form.back_old_password = "";
+            }
+
+
+
+
+
+
+            function authVis() {
+                log_area[0].style.visibility = "visible";
+                reg_area[0].style.visibility = "hidden";
+                ba_area[0].style.visibility = "hidden";
+            }
+
+            function regVis() {
+                log_area[0].style.visibility = "hidden";
+                reg_area[0].style.visibility = "visible";
+                ba_area[0].style.visibility = "hidden";
+                info_auth_label[0].innerHTML = "";
+
+            }
+
+            function backVis() {
+                log_area[0].style.visibility = "hidden";
+                reg_area[0].style.visibility = "hidden";
+                ba_area[0].style.visibility = "visible";
+                info_auth_label[0].innerHTML = "";
+
+            }
+        </script>
+
+    </body>
+</html>
